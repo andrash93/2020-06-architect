@@ -1,0 +1,26 @@
+replicaCount: 2
+
+image:
+  repository: andrash93/crud-app-mongo
+
+service:
+  type: NodePort
+  port: 9000
+
+mongodb:
+  enabled: true
+  mongodbUsername: myuser
+  mongodbPassword: passwd
+  mongodbDatabase: homework
+  service:
+    port: "27017"
+
+
+metrics:
+  serviceMonitor:
+    enabled: true
+
+
+ingress:
+  address: nginx-ingress-nginx-controller
+  hostname: arch.homework
