@@ -1,0 +1,28 @@
+replicaCount: 2
+
+image:
+  repository: andrash93/auth-app
+
+service:
+  type: NodePort
+  port: 9000
+
+redis:
+  enabled: true
+  usePassword: false
+  index: 2
+  service:
+    port: "6379"
+
+mongodb:
+  enabled: true
+  mongodbUsername: myuser
+  mongodbPassword: passwd
+  mongodbDatabase: homework
+  service:
+    port: "27017"
+
+
+ingress:
+  address: nginx-nginx-ingress-controller
+  hostname: arch.homework

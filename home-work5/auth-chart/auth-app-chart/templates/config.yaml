@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "auth-app-chart.fullname" . }}
+data:
+  MONGO_PORT: {{.Values.mongodb.service.port | quote}}
+  MONGO_HOST: {{ .Release.Name }}-mongodb
+  MONGO_DATABASE: {{.Values.mongodb.mongodbDatabase | quote}}
+
+  REDIS_HOST: "auth-redis-master"
+  REDIS_PORT: {{.Values.redis.service.port | quote}}
+  REDIS_DATABASE: {{.Values.redis.index | quote}}
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: auth-app-secret
+type: Opaque
+data:
+  MONGO_USERNAME: {{.Values.mongodb.mongodbUsername | b64enc | quote}}
+  MONGO_PASSWORD: {{.Values.mongodb.mongodbPassword | b64enc | quote}}

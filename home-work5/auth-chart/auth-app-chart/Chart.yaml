@@ -1,0 +1,19 @@
+apiVersion: v2
+name: auth-app-chart
+description: A Helm chart for Kubernetes for auth-app
+type: application
+version: 0.1.0
+appVersion: v1
+
+dependencies:
+  - name: redis
+    version: 10.6.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled
+
+  - name: mongodb
+    version: 7.11.x
+    repository: https://charts.bitnami.com/bitnami
+    condition: mongodb.enabled
+    tags:
+      - homework-database

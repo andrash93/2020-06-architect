@@ -1,0 +1,430 @@
+{
+	"info": {
+		"_postman_id": "5d857a1b-9f30-4a99-9d85-cc386016bb04",
+		"name": "auth-app-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af6c62a9-08b6-480e-8d75-5193648a443d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f58bc1a5-2af7-44b9-9011-921d33d4f145",
+						"exec": [
+							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}')),",
+							"pm.collectionVariables.set(\"login\", pm.variables.replaceIn('{{$randomUserName}}')),",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}')),",
+							"pm.collectionVariables.set(\"userName\", pm.variables.replaceIn('{{$randomUserName}}')),",
+							"pm.collectionVariables.set(\"phone\", pm.variables.replaceIn('{{$randomPhone}}'))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\": \"{{login}}\",\n\t\"password\": \"{{password}}\",\n    \"user_name\": \"{{userName}}\",\n    \"email\": \"{{email}}\",\n    \"phone\": \"{{phone}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/account/register",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accountInfo",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{baseUrl}}/account/info",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"type": "text",
+						"value": "arch.homework",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\":\"{{login}}\",\n\t\"password\":\"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/login",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ec96106e-42cb-4011-ad02-d7f6d1900074",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "528a6414-74a6-43a6-8497-cf9af6a0e2e9",
+						"exec": [
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}')),",
+							"pm.collectionVariables.set(\"userName\", pm.variables.replaceIn('{{$randomUserName}}')),",
+							"pm.collectionVariables.set(\"phone\", pm.variables.replaceIn('{{$randomPhone}}'))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_name\": \"{{userName}}\",\n    \"email\": \"{{email}}\",\n    \"phone\": \"{{phone}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/account/update",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accountInfo",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{baseUrl}}/account/info",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}/logout",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af6c62a9-08b6-480e-8d75-5193648a443d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f58bc1a5-2af7-44b9-9011-921d33d4f145",
+						"exec": [
+							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}')),",
+							"pm.collectionVariables.set(\"login\", pm.variables.replaceIn('{{$randomUserName}}')),",
+							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}')),",
+							"pm.collectionVariables.set(\"userName\", pm.variables.replaceIn('{{$randomUserName}}')),",
+							"pm.collectionVariables.set(\"phone\", pm.variables.replaceIn('{{$randomPhone}}'))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\": \"{{login}}\",\n\t\"password\": \"{{password}}\",\n    \"user_name\": \"{{userName}}\",\n    \"email\": \"{{email}}\",\n    \"phone\": \"{{phone}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/account/register",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"type": "text",
+						"value": "arch.homework",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\":\"{{login}}\",\n\t\"password\":\"{{password}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}/login",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "accountInfo",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "arch.homework",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{baseUrl}}/account/info",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"account",
+						"info"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0f3ada66-262b-42c0-bf16-1f0112e8a4dd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ae773e28-9b25-4fe9-b5dc-85fd1e1aa3f1",
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"[INFO] Request: \" + (('data' in request) ? request['data'] : '') ] = true;",
+					"tests[\"[INFO] Response: \" + responseBody] = true;"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "ab63b55c-8aa5-4734-be1c-774850b7911c",
+			"key": "baseUrl",
+			"value": "arch.homework",
+			"type": "string"
+		},
+		{
+			"id": "a679feec-0ad8-4182-aa41-9fc395e65268",
+			"key": "login",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "04b8a2f4-1d92-4f76-bc4e-40e03b80d56b",
+			"key": "password",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "7146e88c-bfaf-47bd-ba93-9648915ce604",
+			"key": "userName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "b49e26f7-452f-4651-9671-7fc2b9c832bd",
+			"key": "email",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "3b54314e-dc4a-4ba7-bcfe-512535b39b65",
+			"key": "phone",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
