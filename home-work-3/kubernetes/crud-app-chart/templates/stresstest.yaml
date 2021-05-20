@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "crud-app-chart.fullname" . }}-ab
+spec:
+  template:
+    metadata:
+      name: {{ include "crud-app-chart.fullname" . }}-ab
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: ab-test-job
+          image: httpd
+          env:
+            - name: REQUEST_NUMBER
+              value: "4"
+          command:
+            - sh
+            - "-c"
+            - |
+              while true;
+                do echo "{"userName":"имя","firstName":"имя пользователя", "lastName":"второе имя", "phone":"+7999", "email":"aa@email.com"}" > user.json;
+                  ab -n$REQUEST_NUMBER -H 'Host: {{.Values.ingress.hostname}}' -T application/json -p ./user.json  -m POST http://{{.Values.ingress.address}}/otusapp/user;
+                sleep 1;
+              done &
+              while true;
+                do ab -n$REQUEST_NUMBER -H 'Host: {{.Values.ingress.hostname}}' http://{{.Values.ingress.address}}/otusapp/user/1;
+                sleep 1;
+              done &
+              while true;
+                do echo "{\"firstName\":\"test$RANDOM\"}" > user.json;
+                   ab -n$REQUEST_NUMBER -H 'Host: {{.Values.ingress.hostname}}' -T application/json -u ./user.json -m PUT http://{{.Values.ingress.address}}/otusapp/user/1;
+                sleep 1;
+              done &
+              while true;
+                do ab -n$REQUEST_NUMBER -H 'Host: {{.Values.ingress.hostname}}' -m DELETE http://{{.Values.ingress.address}}/otusapp/user/1;
+                sleep 1;
+              done;
+              EOF
+  backoffLimit: 2
